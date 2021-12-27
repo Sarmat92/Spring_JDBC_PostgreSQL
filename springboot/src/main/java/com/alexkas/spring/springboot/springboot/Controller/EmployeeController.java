@@ -28,26 +28,16 @@ public class EmployeeController {
         }
     }
 
-//    @PostMapping("/employees")
-//    public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
-//        try {
-//            employeeService.saveEmployee(new Employee(employee.getName(), employee.getSurname(), employee.getDepartment(),
-//                    employee.getSalary(), employee.getJobTitle(), employee.getDataOfBirth()));
-//            return new ResponseEntity<>("Employee was created successfully.", HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
     @PostMapping("/employees")
     public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
-
+        try {
             employeeService.saveEmployee(new Employee(employee.getName(), employee.getSurname(), employee.getDepartment(),
                     employee.getSalary(), employee.getJobTitle(), employee.getDataOfBirth()));
             return new ResponseEntity<>("Employee was created successfully.", HttpStatus.CREATED);
-
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-
 
     @PutMapping("/employees/{id}")
     public ResponseEntity<String> updateEmployee(@PathVariable("id") int id, @RequestBody Employee employee) {
